@@ -1,0 +1,80 @@
+.product-detail-card {
+    max-width: 600px;
+    margin: 60px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    font-family: 'Inika', serif;
+    color: #8B7969;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.product-detail-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.product-detail-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-detail-price {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.product-detail-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.product-detail-season {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.product-detail-back {
+    text-align: center;
+}
+
+.product-detail-button {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #D9D0C7;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.product-detail-button:hover {
+    background-color: #BFB1A3;
+}
+/* ヘッダー全体の背景とレイアウト */
+.header {
+    background-color: #F5C800;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+}
+
+/* ロゴまたはタイトル部分 */
+.header-title {
+    font-family: 'Georgia', serif;
+    /* ← 近い代用フォント */
+    font-style: italic;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #fff;
+    margin: 0;
+}
