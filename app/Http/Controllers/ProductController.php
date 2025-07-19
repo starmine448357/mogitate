@@ -60,5 +60,25 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
 
+        $products = Product::when($keyword, function ($query, $keyword) {
+            return $query->where('name', 'like', '%' . $keyword . '%');
+        })->get();
+
+        return view('products.index', compact('products', 'keyword'));
+    }
+    public function destroy(Product $product)
+    {
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->seasons()->detach();
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', '商品を削除しました');
+    }
 }
