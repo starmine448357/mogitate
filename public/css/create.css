@@ -1,0 +1,195 @@
+/* 全体レイアウト */
+.create-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+.create-title {
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* フォーム共通 */
+.create-form .form-group {
+    margin-bottom: 25px;
+}
+
+.create-form .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+.create-form .form-control:focus {
+    border-color: #FFA929;
+    outline: none;
+    background-color: #fff;
+}
+
+/* フォームラベル */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* 必須バッジ */
+.required-badge {
+    display: inline-block;
+    background-color: #ff0000;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 0;
+    margin-left: 8px;
+    margin-bottom: 5px;
+}
+
+/* 注意書き */
+.note-red {
+    color: #ff0000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-bottom: 5px;
+}
+
+/* 季節チェックボックス */
+.season-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.season-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.season-option {
+    font-size: 14px;
+    color: #333;
+}
+
+.season-option input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.season-option input[type="checkbox"]:checked {
+    background-color: #000;
+}
+
+/* ファイルアップロード */
+.file-input {
+    display: none;
+}
+
+.file-label {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #E0DFDE;
+    color: #4B4B4B;
+    font-size: 1rem;
+    border: 1px solid #4B4B4B;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    transition: background-color 0.3s;
+    border-radius: 0;
+    margin-bottom: 5px;
+    max-width: 200px;
+}
+
+.file-label:hover {
+    background-color: #d6d4d3;
+}
+
+/* ファイル名横に表示 */
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.image-filename {
+    font-size: 0.85rem;
+    color: #555;
+    word-break: break-all;
+}
+
+/* プレビュー画像 */
+.image-preview-container {
+    margin-bottom: 10px;
+}
+
+.image-preview {
+    max-width: 300px;
+    height: auto;
+    display: block;
+}
+
+/* ボタン */
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.cancel-btn,
+.submit-btn {
+    padding: 10px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+}
+
+.submit-btn {
+    background-color: #FFA929;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #e2971c;
+}

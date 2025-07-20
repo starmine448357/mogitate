@@ -1,0 +1,247 @@
+body {
+    background-color:  #F8F8F8;;
+    font-family: 'Inter', sans-serif;
+    color: white;
+}
+
+.container {
+    display: flex;
+    padding: 40px 20px;
+    /* ← 左右を 40px → 20px に */
+}
+
+.sidebar {
+    width: 200px;
+    color: #000;
+    margin-right: 30px;
+}
+
+.sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 55px;
+}
+
+.sidebar input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: none;
+    font-size: 14px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FFC107;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.sidebar .sort {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.sidebar select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.product-area {
+    flex: 1;
+}
+
+.product-area-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.add-button {
+    width: 137px;
+    height: 50px;
+    padding: 13px 20px;
+    border-radius: 5px;
+    background: #FFA929;
+    box-shadow: 0px 4px 10px 0px #0000001A;
+    text-align: center;
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.alert-success {
+    background-color: #DFFFE3;
+    color: #0F5E31;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* ← レスポンシブ対応もOK */
+    gap: 30px;
+}
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+    transform: scale(1.02);
+}
+
+.product-card img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+    border-radius: 5px 5px 0 0;
+}
+
+.product-info {
+    padding: 15px;
+}
+
+.product-name-price {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.pagination-item {
+    display: inline-block;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    gap: 30px;
+    justify-content: center;
+    /* ← これだけでOK！ */
+    width: 100%;
+}
+
+.product-card {
+    width: 100%;
+    /* max-width や margin は不要 */
+}
+
+.pagination-item a,
+.pagination-item span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border: none;
+}
+
+.pagination-item.active span {
+    background-color: #F5C800;
+    color: white;
+}
+
+.pagination-item.disabled span {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.sort-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    background-color: #FFA929;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    gap: 8px;
+}
+
+.reset-sort {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0 6px;
+    cursor: pointer;
+}
+
+.reset-sort:hover {
+    color: #4B4B4B;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.sort-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #F5C800;
+    border-radius: 41px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: #4B4B4B;
+    background-color: #fff;
+    gap: 10px;
+    width: fit-content;
+    height: 41px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.sort-clear-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background-color: #F5C800;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background-color 0.2s;
+}
+
+.sort-clear-btn:hover {
+    background-color: #d4ae00;
+}

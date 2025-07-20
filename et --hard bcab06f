@@ -1,0 +1,14 @@
+[33me1542cb[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m 商品登録機能の完成とスタイル調整
+[33m07c4e67[m searchルートの順序修正
+[33mbcab06f[m 商品機能のルーティング統一と表示調整
+[33m4f5494c[m プロジェクト整備：MySQLデータ除外・構成安定化
+[33m8b54c6c[m fix: Initialize laravel version 8.83.8
+[33mf87057d[m Merge branch 'master' of https://github.com/coachtech-material/laravel-docker-template
+[33m34626df[m add: laravel-api-ec
+[33m61a952c[m fix: settings
+[33m1c7fac8[m merge conflict
+[33me86175e[m add: laravel api reservation
+[33mfe7f3d7[m fix: laravel api attendance
+[33m2068a0c[m fix
+[33m867f56e[m fix
+[33m281e0c8[m first commit
