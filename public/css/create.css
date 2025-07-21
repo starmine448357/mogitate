@@ -114,6 +114,9 @@
     display: none;
 }
 
+.file-input:hover {
+    background-color: #d6d4d3;
+}
 .file-label {
     display: inline-block;
     padding: 5px 10px;
@@ -145,10 +148,12 @@
 .image-filename {
     font-size: 0.85rem;
     color: #555;
-    word-break: break-all;
+    word-break: break-word;
+    display: none;
+    /* 初期状態で非表示、JSで表示 */
 }
 
-/* プレビュー画像 */
+/* プレビュー画像（未使用） */
 .image-preview-container {
     margin-bottom: 10px;
 }

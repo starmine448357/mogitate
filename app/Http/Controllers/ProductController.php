@@ -14,6 +14,7 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
+        // 並び替え
         if ($request->filled('sort')) {
             $direction = $request->input('sort') === 'asc' ? 'asc' : 'desc';
             $query->orderBy('price', $direction);
@@ -22,15 +23,11 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate(6)->appends($request->all());
-
         return view('products.index', compact('products'));
     }
 
     public function create()
     {
-        // 新規登録画面に来たときはセッションの一時画像情報をクリア
-        session()->forget(['image_temp_path', 'image_temp_url', 'image_temp_name']);
-
         $seasons = Season::all();
         return view('products.create', compact('seasons'));
     }
@@ -39,28 +36,10 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        // 画像が選択されていれば一時保存してセッションに記録
+        // 画像アップロード
         if ($request->hasFile('image')) {
-            $tempPath = $request->file('image')->store('temp', 'public');
-
-            session([
-                'image_temp_path' => $tempPath,
-                'image_temp_url' => Storage::url($tempPath),
-                'image_temp_name' => $request->file('image')->getClientOriginalName(),
-            ]);
-
-            return back()->withInput();
-        }
-
-        // セッションに画像があるときだけ本保存（セッションがなければ画像エラー）
-        if (session()->has('image_temp_path')) {
-            $tempPath = session('image_temp_path');
-            $newPath = 'images/' . basename($tempPath);
-
-            Storage::disk('public')->move($tempPath, $newPath);
-            $data['image'] = $newPath;
-        } else {
-            return back()->withInput()->withErrors(['image' => '商品画像を登録してください']);
+            $path = $request->file('image')->store('images', 'public');
+            $data['image'] = $path;
         }
 
         // 商品登録
@@ -69,9 +48,6 @@ class ProductController extends Controller
         if (isset($data['seasons'])) {
             $product->seasons()->attach($data['seasons']);
         }
-
-        // 成功後セッションをクリア
-        session()->forget(['image_temp_path', 'image_temp_url', 'image_temp_name']);
 
         return redirect()->route('products.index')->with('success', '商品を登録しました');
     }
@@ -143,7 +119,6 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate(6)->appends($request->all());
-
         return view('products.index', compact('products', 'keyword'));
     }
 }
