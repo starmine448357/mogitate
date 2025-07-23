@@ -7,7 +7,6 @@ body {
 .container {
     display: flex;
     padding: 40px 20px;
-    /* ← 左右を 40px → 20px に */
 }
 
 .sidebar {
@@ -91,7 +90,6 @@ body {
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    /* ← レスポンシブ対応もOK */
     gap: 30px;
 }
 .product-card {
@@ -147,13 +145,11 @@ body {
     grid-template-columns: repeat(3, 300px);
     gap: 30px;
     justify-content: center;
-    /* ← これだけでOK！ */
     width: 100%;
 }
 
 .product-card {
     width: 100%;
-    /* max-width や margin は不要 */
 }
 
 .pagination-item a,

@@ -22,7 +22,6 @@
 
 ## 環境構築手順（Docker〜Seederまで）
 
-```bash
 # 1. リポジトリをクローン
 git clone git@github.com:starmine448357/mogitate.git
 cd mogitate/src

@@ -14,8 +14,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $query = Product::query();
-
-        // 並び替え
         if ($request->filled('sort')) {
             $direction = $request->input('sort') === 'asc' ? 'asc' : 'desc';
             $query->orderBy('price', $direction);
@@ -37,13 +35,11 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        // 画像アップロード
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
             $data['image'] = $path;
         }
 
-        // 商品登録
         $product = Product::create($data);
 
         if (isset($data['seasons'])) {
@@ -62,67 +58,50 @@ class ProductController extends Controller
     }
 
     public function update(UpdateProductRequest $request, Product $product)
-{
+    {
+        $validated = $request->validated();
 
-    $validated = $request->validated();
+        $noChanges =
+            $product->name === $validated['name'] &&
+            $product->price === $validated['price'] &&
+            $product->description === ($validated['description'] ?? '') &&
+            $product->seasons->pluck('id')->sort()->values()->all() === collect($validated['seasons'] ?? [])->sort()->values()->all() &&
+            !$request->hasFile('image');
 
-    // 変更がなければ一覧にリダイレクト
-    $noChanges =
-        $product->name === $validated['name'] &&
-        $product->price === $validated['price'] &&
-        $product->description === $validated['description'] &&
-        $product->seasons->pluck('id')->sort()->values()->all() === collect($validated['seasons'])->sort()->values()->all() &&
-        !$request->hasFile('image');
-
-    if ($noChanges) {
-        return redirect()->route('products.index')->with('message', '変更はありませんでした');
-    }
-
-
-    if ($request->hasFile('image')) {
-        $tempPath = $request->file('image')->store('temp', 'public');
-        session()->put('temp_image', $tempPath); 
-    }
-
-    // バリデーション（フォームリクエスト経由）
-
-
-    // 一時画像があれば本保存
-    if (session()->has('temp_image')) {
-        $filename = basename(session('temp_image'));
-        $newPath = 'images/' . $filename;
-
-        // 旧画像を削除
-        if ($product->image && Storage::disk('public')->exists($product->image)) {
-            Storage::disk('public')->delete($product->image);
+        if ($noChanges) {
+            return redirect()->route('products.index')->with('message', '変更はありませんでした');
         }
 
-        Storage::disk('public')->move(session('temp_image'), $newPath);
-        $product->image = $newPath;
-
-        session()->forget('temp_image');
-
-        } elseif ($product->image && Storage::disk('public')->exists($product->image)) {
-        $product->image = $product->image;
-
-        // ★ 追加：元画像すら存在しなかった場合（画像なしにする or ダミー設定）
-        } else {
-            $product->image = null; // または 'images/default.png' など
+        // 画像がアップロードされていれば一時保存
+        if ($request->hasFile('image')) {
+            $tempPath = $request->file('image')->store('temp', 'public');
+            session()->put('temp_image', $tempPath);
         }
-    
 
-    // 残りの項目を更新
-    $product->name = $validated['name'];
-    $product->price = $validated['price'];
-    $product->description = $validated['description'];
-    $product->save();
+        // 一時保存された画像があれば移動して保存
+        if (session()->has('temp_image')) {
+            $filename = basename(session('temp_image'));
+            $newPath = 'images/' . $filename;
 
-    $product->seasons()->sync($validated['seasons']);
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
 
-    return redirect()->route('products.index')->with('message', '商品を更新しました');
-}
+            Storage::disk('public')->move(session('temp_image'), $newPath);
+            $product->image = $newPath;
 
+            session()->forget('temp_image');
+        }
 
+        $product->name = $validated['name'];
+        $product->price = $validated['price'];
+        $product->description = $validated['description'] ?? '';
+        $product->save();
+
+        $product->seasons()->sync($validated['seasons'] ?? []);
+
+        return redirect()->route('products.index')->with('message', '商品を更新しました');
+    }
 
     public function search(Request $request)
     {
@@ -146,7 +125,6 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        // 画像も削除する場合
         if ($product->image && Storage::disk('public')->exists($product->image)) {
             Storage::disk('public')->delete($product->image);
         }

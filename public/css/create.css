@@ -31,7 +31,6 @@ body {
     color: #333;
 }
 
-/* フォーム共通 */
 .create-form .form-group {
     margin-bottom: 25px;
 }
@@ -52,20 +51,17 @@ body {
     background-color: #fff;
 }
 
-/* フォームラベル */
 .form-group label {
     display: block;
     margin-bottom: 8px;
 }
 
-/* エラーメッセージ */
 .error-message {
     color: red;
     font-size: 13px;
     margin-top: 5px;
 }
 
-/* 必須バッジ */
 .required-badge {
     display: inline-block;
     background-color: #ff0000;
@@ -78,7 +74,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* 注意書き */
 .note-red {
     color: #ff0000;
     font-size: 0.75rem;
@@ -87,7 +82,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* 季節チェックボックス */
 .season-label {
     display: block;
     font-weight: bold;
@@ -124,7 +118,6 @@ body {
     background-color: #000;
 }
 
-/* ファイルアップロード */
 .file-input {
     display: none;
 }
@@ -152,7 +145,6 @@ body {
     background-color: #d6d4d3;
 }
 
-/* ファイル名横に表示 */
 .file-upload-wrapper {
     display: flex;
     align-items: center;
@@ -165,10 +157,8 @@ body {
     color: #555;
     word-break: break-word;
     display: none;
-    /* 初期状態で非表示、JSで表示 */
 }
 
-/* プレビュー画像（未使用） */
 .image-preview-container {
     margin-bottom: 10px;
 }
@@ -179,7 +169,6 @@ body {
     display: block;
 }
 
-/* ボタン */
 .form-buttons {
     display: flex;
     justify-content: center;

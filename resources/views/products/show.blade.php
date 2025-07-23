@@ -72,16 +72,19 @@
             <a href="{{ route('products.index') }}" class="back-button">戻る</a>
             <button type="submit" class="submit-button">変更を保存</button>
         </div>
+    </form> {{-- ← 更新フォームここで閉じる！ --}}
 
-        <div class="delete-button-wrapper">
-            <form action="{{ route('products.delete', $product->id) }}" method="POST" class="delete-form" onsubmit="return confirm('本当に削除しますか？');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="delete-button">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </form>
-        </div>
+    {{-- 削除フォームは別枠で独立 --}}
+    <div class="delete-button-wrapper">
+        <form action="{{ route('products.delete', $product->id) }}" method="POST" class="delete-form" onsubmit="return confirm('本当に削除しますか？');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-button">
+                <i class="fas fa-trash"></i>
+            </button>
+        </form>
+    </div>
+</div>
 @endsection
 
 @section('js')

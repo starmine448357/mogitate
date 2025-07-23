@@ -26,12 +26,10 @@
         <div class="form-group">
             <label>商品画像 <span class="required-badge">必須</span></label>
 
-            <!-- プレビュー表示部分 -->
             <div class="image-preview-container">
                 <img id="preview" class="image-preview" style="display: none;">
             </div>
 
-            <!-- ファイル選択ボタン -->
             <div class="file-upload-wrapper">
                 <label for="image" class="file-label">ファイルを選択</label>
                 
@@ -83,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function () {
             filename.textContent = file.name;
             filename.style.display = 'inline';
 
-            // 画像プレビュー表示
             const reader = new FileReader();
             reader.onload = function (e) {
                 preview.src = e.target.result;

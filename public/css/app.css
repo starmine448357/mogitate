@@ -63,7 +63,6 @@ body {
 .product-detail-button:hover {
     background-color: #BFB1A3;
 }
-/* ヘッダー全体の背景とレイアウト */
 .header {
     background-color: #fff;
     padding: 16px 32px;
@@ -71,10 +70,8 @@ body {
     align-items: center;
 }
 
-/* ロゴまたはタイトル部分 */
 .header-title {
     font-family: 'Georgia', serif;
-    /* ← 近い代用フォント */
     font-style: italic;
     font-weight: 500;
     font-size: 30px;

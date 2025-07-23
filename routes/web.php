@@ -24,4 +24,5 @@ Route::put('/products/{product}', [ProductController::class, 'update'])->name('p
 // 商品詳細閲覧）
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
+// 商品削除
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.delete');
