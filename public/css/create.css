@@ -2,12 +2,27 @@
 .create-container {
     max-width: 800px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color: #f8F8F8;
     padding: 40px;
     border-radius: 10px;
     font-family: 'Inter', sans-serif;
 }
 
+input[type="text"],
+input[type="number"],
+textarea {
+    background-color: #FFFFFF;
+    color: #000000;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F8F8F8;
+}
 .create-title {
     text-align: left;
     font-size: 24px;
@@ -28,7 +43,7 @@
     border-radius: 6px;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
 
 .create-form .form-control:focus {

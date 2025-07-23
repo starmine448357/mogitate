@@ -7,7 +7,13 @@
 @section('content')
 <div class="container">
     <div class="sidebar">
-        <h2 class="sidebar-title">商品一覧</h2>
+       <h2 class="sidebar-title">
+        @if(request('keyword'))
+            "{{ request('keyword') }}"の商品一覧
+        @else
+            商品一覧
+        @endif
+    </h2>
         <form action="{{ route('products.search') }}" method="GET">
             <input type="text" name="keyword" placeholder="商品名で検索" value="{{ request('keyword') }}">
             <button type="submit">検索</button>
@@ -45,7 +51,7 @@
 
         <div class="product-list">
             @if($products->isEmpty())
-                <p>商品が登録されていません。</p>
+                <p></p>
             @else
                 @foreach($products as $product)
                     <a href="{{ route('products.show', $product->id) }}" class="product-card">

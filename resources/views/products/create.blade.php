@@ -34,6 +34,7 @@
             <!-- ファイル選択ボタン -->
             <div class="file-upload-wrapper">
                 <label for="image" class="file-label">ファイルを選択</label>
+                
                 <input type="file" name="image" id="image" class="file-input" accept="image/png, image/jpeg">
                 <span id="filename" class="image-filename"></span>
             </div>

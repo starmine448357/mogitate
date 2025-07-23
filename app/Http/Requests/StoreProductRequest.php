@@ -16,7 +16,7 @@ class StoreProductRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'price' => 'required|integer|min:0|max:10000',
-            'image' => 'required|image|mimes:jpeg,png|max:6000',
+            'image' => 'required|image|mimes:jpeg,png|max:10240',
             'description' => 'required|string|max:120',
             'seasons' => 'required|array',
             'seasons.*' => 'exists:seasons,id',
@@ -35,6 +35,8 @@ class StoreProductRequest extends FormRequest
             'description.required' => '商品説明を入力してください',
             'description.max' => '商品説明は120文字以内で入力してください',
             'seasons.required' => '季節を選択してください',
+            'image.max' => '画像サイズは10MB以内でアップロードしてください。',
+
         ];
     }
 }

@@ -12,6 +12,9 @@
     <!-- Google Fonts 代用 -->
     <link href="https://fonts.googleapis.com/css2?family=Georgia&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome CDN（追加）-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
      @yield('css')

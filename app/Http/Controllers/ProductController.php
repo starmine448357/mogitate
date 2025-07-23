@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -55,52 +56,73 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load('seasons');
-        return view('products.show', compact('product'));
-    }
-
-    public function edit(Product $product)
-    {
         $seasons = Season::all();
-        $selectedSeasons = $product->seasons->pluck('id')->toArray();
-        return view('products.edit', compact('product', 'seasons', 'selectedSeasons'));
+
+        return view('products.show', compact('product', 'seasons'));
     }
 
-    public function update(Request $request, Product $product)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|integer|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
-            'seasons' => 'nullable|array',
-            'seasons.*' => 'exists:seasons,id',
-        ]);
+    public function update(UpdateProductRequest $request, Product $product)
+{
 
-        if ($request->hasFile('image')) {
-            if ($product->image) {
-                Storage::disk('public')->delete($product->image);
-            }
-            $path = $request->file('image')->store('images', 'public');
-            $validated['image'] = $path;
-        }
+    $validated = $request->validated();
 
-        $product->update($validated);
-        $product->seasons()->sync($validated['seasons'] ?? []);
+    // 変更がなければ一覧にリダイレクト
+    $noChanges =
+        $product->name === $validated['name'] &&
+        $product->price === $validated['price'] &&
+        $product->description === $validated['description'] &&
+        $product->seasons->pluck('id')->sort()->values()->all() === collect($validated['seasons'])->sort()->values()->all() &&
+        !$request->hasFile('image');
 
-        return redirect()->route('products.index')->with('success', '商品を更新しました');
+    if ($noChanges) {
+        return redirect()->route('products.index')->with('message', '変更はありませんでした');
     }
 
-    public function destroy(Product $product)
-    {
-        if ($product->image) {
+
+    if ($request->hasFile('image')) {
+        $tempPath = $request->file('image')->store('temp', 'public');
+        session()->put('temp_image', $tempPath); 
+    }
+
+    // バリデーション（フォームリクエスト経由）
+
+
+    // 一時画像があれば本保存
+    if (session()->has('temp_image')) {
+        $filename = basename(session('temp_image'));
+        $newPath = 'images/' . $filename;
+
+        // 旧画像を削除
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
             Storage::disk('public')->delete($product->image);
         }
 
-        $product->seasons()->detach();
-        $product->delete();
+        Storage::disk('public')->move(session('temp_image'), $newPath);
+        $product->image = $newPath;
 
-        return redirect()->route('products.index')->with('success', '商品を削除しました');
-    }
+        session()->forget('temp_image');
+
+        } elseif ($product->image && Storage::disk('public')->exists($product->image)) {
+        $product->image = $product->image;
+
+        // ★ 追加：元画像すら存在しなかった場合（画像なしにする or ダミー設定）
+        } else {
+            $product->image = null; // または 'images/default.png' など
+        }
+    
+
+    // 残りの項目を更新
+    $product->name = $validated['name'];
+    $product->price = $validated['price'];
+    $product->description = $validated['description'];
+    $product->save();
+
+    $product->seasons()->sync($validated['seasons']);
+
+    return redirect()->route('products.index')->with('message', '商品を更新しました');
+}
+
+
 
     public function search(Request $request)
     {
@@ -120,5 +142,18 @@ class ProductController extends Controller
 
         $products = $query->paginate(6)->appends($request->all());
         return view('products.index', compact('products', 'keyword'));
+    }
+
+    public function destroy(Product $product)
+    {
+        // 画像も削除する場合
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->seasons()->detach();
+        $product->delete();
+
+        return redirect()->route('products.index')->with('message', '商品を削除しました');
     }
 }

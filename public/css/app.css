@@ -1,3 +1,8 @@
+body {
+    font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3',
+        'Yu Gothic', '游ゴシック', 'Meiryo', sans-serif;
+}
+
 .product-detail-card {
     max-width: 600px;
     margin: 60px auto;
@@ -60,7 +65,7 @@
 }
 /* ヘッダー全体の背景とレイアウト */
 .header {
-    background-color: #F5C800;
+    background-color: #fff;
     padding: 16px 32px;
     display: flex;
     align-items: center;
@@ -75,6 +80,6 @@
     font-size: 30px;
     line-height: 100%;
     letter-spacing: 0;
-    color: #fff;
+    color: #F5C800;
     margin: 0;
 }
